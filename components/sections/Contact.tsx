@@ -27,9 +27,16 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-950 to-gray-950/90 px-4 md:px-6 py-12 md:py-16 lg:py-20"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-950 to-gray-950/90 px-4 md:px-6 py-12 md:py-16 lg:py-20 relative"
     >
-      <div className="w-full max-w-7xl mx-auto px-4">
+      {/* Background blobs */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-64 md:h-64 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-72 md:h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
+      <div className="w-full max-w-7xl mx-auto px-4 z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -44,8 +51,8 @@ export default function Contact() {
           >
             Get In Touch
           </h2>
-          <div className="w-16 md:w-20 h-0.5 md:h-1 bg-linear-to-r from-emerald-500 to-cyan-500 mx-auto mt-4"></div>
-          <p className="space-y-10 text-gray-400  mt-6 max-w-4xl mx-auto text-lg">
+          <div className="w-16 md:w-20 h-0.5 md:h-1 bg-gradient-to-r from-emerald-500 to-cyan-500 mx-auto mt-4"></div>
+          <p className="text-gray-400 mt-6 max-w-4xl mx-auto text-lg">
             Have a project in mind? Feel free to reach out — I’d love to hear from you!
           </p>
         </motion.div>
@@ -57,7 +64,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-800/30 backdrop-blur-lg rounded-3xl border border-gray-700/50 p-8 md:p-10 shadow-xl"
+            className="bg-gray-800/30 backdrop-blur-lg rounded-3xl border border-gray-700/50 p-8 md:p-10 shadow-xl relative z-10"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
               <Mail className="text-emerald-400" size={28} />
@@ -127,7 +134,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-800/30 backdrop-blur-lg rounded-3xl border border-gray-700/50 p-8 md:p-10 shadow-xl"
+            className="bg-gray-800/30 backdrop-blur-lg rounded-3xl border border-gray-700/50 p-8 md:p-10 shadow-xl relative z-10"
           >
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
               <Mail className="text-cyan-400" size={28} />
@@ -144,7 +151,7 @@ export default function Contact() {
             >
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className=" space-y-10 block text-base font-medium text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-base font-medium text-gray-300 mb-2">
                   Full Name
                 </label>
                 <div className="relative">
@@ -239,8 +246,6 @@ export default function Contact() {
               )}
             </form>
           </motion.div>
-
-
         </div>
       </div>
     </section>

@@ -31,7 +31,7 @@ export default function Home() {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.4, // section is considered active when 40% visible
+        threshold: 0.4, 
       }
     );
 

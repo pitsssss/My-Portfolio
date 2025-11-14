@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-12 md:py-16 lg:py-20 text-center"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-12 md:py-16 lg:py-20 text-center relative"
     >
 
       {/* Background blobs */}
@@ -16,7 +16,7 @@ export default function About() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
       
-      <div className="w-full max-w-4xl mx-auto">
+      <div className="w-full max-w-4xl mx-auto z-10">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -61,7 +61,9 @@ export default function About() {
               </p>
             </div>
 
-            <motion.button
+            <motion.a
+              href="/cv.pdf"
+              download
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.97 }}
               className="relative px-12 py-6 rounded-full font-semibold 
@@ -78,7 +80,7 @@ export default function About() {
                 group-hover:bg-emerald-500 
                 transition-colors duration-300"
               ></span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Right Column */}
