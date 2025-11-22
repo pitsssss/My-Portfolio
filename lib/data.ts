@@ -28,25 +28,30 @@ export const skills: Skill[] = [
   { name: 'RESTful APIs', icon: Network, level: 60 },
 ];
 
+
 export const projects: Project[] = [
   {
-    title: 'Syria Explorer – Digital Tourism Platform ',
-    description: 'A startup‑stage digital platform built with Next.js',
+    title: 'Syria Explorer – Digital Tourism Platform',
+    description:
+      'A startup‑stage digital platform built with Next.js, dedicated to showcasing Syria’s rich cultural heritage, historic sites, and traditions. Users can explore tourist destinations and ancient sites, and access articles, news and travel‑recommendations — all aimed at giving the world a fresh and authentic view of Syrian culture.',
     tech: ['React', 'Next.js', 'Typescript', 'GraphQL'],
     link: 'https://syriaexplorer.com/'
   },
+  
   {
-    title: 'Fatleh – Smart Tourism Platform: ',
-    description: 'A comprehensive tourism application designed to deliver a seamless travel experience across Syria.',
+    title: 'Fatleh – Smart Tourism Platform',
+    description:
+      'A comprehensive tourism application designed to deliver a seamless travel experience across Syria. Users can explore destinations, hotels, restaurants, and activities; book ready-made or custom trips; and reserve flight tickets through integration with Amadeus API. The system also supports secure online payments via Stripe and real-time notifications for bookings.',
     tech: ['Laravel', 'Flutter', 'MySQL', 'Stripe'],
     link: 'https://github.com/pitsssss/Tourism-backend'
+  },
+
+  {
+    title: 'Sokoban Game',
+    description: 'A classic Sokoban puzzle game implemented in Java using Swing for the graphical user interface.The goal is to push all boxes onto designated target spots to complete each level.',
+    tech: ['Java'],
+    link: 'https://github.com/pitsssss/SokoBan-Game'
   }
-  // {
-  //   title: 'Task Management System',
-  //   description: 'Collaborative productivity ToDo List tool with real-time sync and notifications',
-  //   tech: ['PHP','Laravel','Firebase', 'Socket.io'],
-  //   link: '#'
-  // }
 ];
 
 // ======================
