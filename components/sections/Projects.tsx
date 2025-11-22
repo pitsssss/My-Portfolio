@@ -23,7 +23,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-16 md:py-20 lg:py-24 relative"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-16 md:py-20 lg:py-24 pt-24 md:pt-28 lg:pt-38 relative"
     >
       {/* Professional Animated Background */}
       <div className="absolute inset-0 z-0 pointer-events-none"
