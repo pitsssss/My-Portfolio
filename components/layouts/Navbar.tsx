@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { SectionId } from '@/lib/types';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, Navigation, X } from 'lucide-react';
 import { navItems } from '@/lib/data';
 import { scrollToSection } from '@/lib/utils';
 
@@ -116,11 +116,12 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
         <div className="md:hidden ml-auto">
           <motion.button
             className="p-2 rounded-lg text-gray-300 hover:text-emerald-400 hover:bg-gray-800/50 transition-colors"
-            onClick={() => setIsMenuOpen(true)}
-            aria-label="Open navigation menu"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label= {!isMenuOpen ? "close navigation menu" : "Open navigation menu"}
             whileTap={{ scale: 0.95 }}
           >
-            <Menu size={24} />
+            {isMenuOpen ? <X size={24} className='txt-emerald-400'/>: <Menu size={24}/>}
+            
           </motion.button>
         </div>
       </div>
