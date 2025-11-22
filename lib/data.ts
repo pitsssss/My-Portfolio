@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: 'Syria Explorer – Digital Tourism Platform',
     description:
       'A startup‑stage digital platform built with Next.js, dedicated to showcasing Syria’s rich cultural heritage, historic sites, and traditions. Users can explore tourist destinations and ancient sites, and access articles, news and travel‑recommendations — all aimed at giving the world a fresh and authentic view of Syrian culture.',
-    tech: ['React', 'Next.js', 'Typescript', 'GraphQL'],
+    tech: ['React', 'Next.js', 'Typescript', 'GraphQL','Docker'],
     link: 'https://syriaexplorer.com/'
   },
   
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   {
     title: 'Sokoban Game',
     description: 'A classic Sokoban puzzle game implemented in Java using Swing for the graphical user interface.The goal is to push all boxes onto designated target spots to complete each level.',
-    tech: ['Java'],
+    tech: ['Java','Swing'],
     link: 'https://github.com/pitsssss/SokoBan-Game'
   }
 ];

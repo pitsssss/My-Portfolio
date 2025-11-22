@@ -102,7 +102,7 @@ export default function About() {
         ))}
       </div>
 
-      <div className="w-full max-w-4xl mx-auto z-10">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

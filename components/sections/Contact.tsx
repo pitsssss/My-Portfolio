@@ -109,7 +109,7 @@ export default function Contact() {
         ))}
       </div>
 
-      <div className="w-full max-w-6xl mx-auto px-4 z-10">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -150,7 +150,7 @@ export default function Contact() {
             </span>
           </h3>
 
-          <div className="space-y-5 max-w-3xl mx-auto">
+          <div className="space-y-5 max-w-3xl mx-auto px-6 sm:px-6">
             {[
               {
                 icon: Mail,

@@ -22,7 +22,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-12 md:py-16 lg:py-20 relative"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-950 px-4 md:px-6 py-16 md:py-20 lg:py-24 relative"
     >
       {/* Professional Animated Background */}
       <div className="absolute inset-0 z-0 pointer-events-none"
@@ -102,7 +102,7 @@ export default function Skills() {
         ))}
       </div>
 
-      <div className="w-full max-w-6xl mx-auto px-4 z-10">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export default function Skills() {
           <div className="w-16 md:w-20 h-0.5 md:h-1 bg-gradient-to-r from-emerald-500 to-cyan-500 mx-auto mt-3"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 px-6 sm:px-6">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
