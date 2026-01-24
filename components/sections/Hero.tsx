@@ -292,15 +292,15 @@
 //     </section>
 //   );
 // }
-
 'use client';
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Sphere, Stars } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import React, { useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
-function RotatingTorus() {
+function RotatingTorus({ scale }: { scale: number }) {
   const ref = useRef<any>(null);
 
   useFrame(({ clock }) => {
@@ -311,7 +311,7 @@ function RotatingTorus() {
   });
 
   return (
-    <mesh ref={ref} position={[0, 0, 0]}>
+    <mesh ref={ref} position={[0, 0, 0]} scale={scale}>
       <torusKnotGeometry args={[1, 0.35, 128, 32]} />
       <meshStandardMaterial color="#00fff0" metalness={0.6} roughness={0.2} />
     </mesh>
@@ -319,26 +319,36 @@ function RotatingTorus() {
 }
 
 export default function Hero() {
+  // Media query for mobile screens
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const torusScale = isMobile ? 0.6 : 1;
+
   return (
     <section className="relative w-full h-screen bg-gray-950 flex items-center justify-center overflow-hidden">
-
       {/* 3D Canvas */}
-      <Canvas className="absolute inset-0 z-0">
-        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.8} />
+      <Canvas className="absolute inset-0 z-0" camera={{ position: [0, 0, 5], fov: 50 }}>
+        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.6} />
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
 
-        <Stars radius={100} depth={50} count={500} factor={4} saturation={0} fade />
+        <Stars
+          radius={100}
+          depth={50}
+          count={isMobile ? 200 : 500}
+          factor={4}
+          saturation={0}
+          fade
+        />
 
-        <RotatingTorus />
+        <RotatingTorus scale={torusScale} />
 
-        <Sphere args={[0.1, 32, 32]} position={[2, 1, -1]}>
+        <Sphere args={[isMobile ? 0.05 : 0.1, 32, 32]} position={[2, 1, -1]}>
           <meshStandardMaterial color="#3b82f6" transparent opacity={0.5} />
         </Sphere>
-        <Sphere args={[0.08, 32, 32]} position={[-1.5, 0.8, 1]}>
+        <Sphere args={[isMobile ? 0.04 : 0.08, 32, 32]} position={[-1.5, 0.8, 1]}>
           <meshStandardMaterial color="#10b981" transparent opacity={0.5} />
         </Sphere>
-        <Sphere args={[0.12, 32, 32]} position={[-2, -1, -0.5]}>
+        <Sphere args={[isMobile ? 0.06 : 0.12, 32, 32]} position={[-2, -1, -0.5]}>
           <meshStandardMaterial color="#8b5cf6" transparent opacity={0.4} />
         </Sphere>
       </Canvas>
@@ -349,7 +359,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl md:text-6xl font-bold text-white mb-4"
+          className="text-4xl md:text-6xl font-bold text-white mb-4"
         >
           Hi, I'm Peter Toss
         </motion.h1>
@@ -358,9 +368,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
+          className="text-gray-400 text-base md:text-xl max-w-2xl mx-auto"
         >
-          Full Stack Engineer &  AI Automation Engineer & Digital Marketing Specialist building amazing web and mobile experiences.
+          Full Stack Engineer & AI Automation Engineer & Digital Marketing Specialist building amazing web and mobile experiences.
         </motion.p>
 
         <motion.a
@@ -368,7 +378,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="mt-8 inline-block px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold text-lg hover:scale-105 transition-transform duration-300"
+          className="mt-8 inline-block px-6 md:px-8 py-3 md:py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold text-base md:text-lg hover:scale-105 transition-transform duration-300"
         >
           View My Work
         </motion.a>
