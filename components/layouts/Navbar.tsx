@@ -193,6 +193,136 @@
 // }
 
 
+// 'use client';
+
+// import { useState, useEffect } from 'react';
+// import type { SectionId } from '@/lib/types';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import { Menu, X } from 'lucide-react';
+// import { navItems } from '@/lib/data';
+// import { scrollToSection } from '@/lib/utils';
+
+// export default function Navbar({ activeSection }: { activeSection: SectionId }) {
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [isScrolled, setIsScrolled] = useState(false);
+
+//   useEffect(() => {
+//     const onScroll = () => setIsScrolled(window.scrollY > 12);
+//     window.addEventListener('scroll', onScroll);
+//     return () => window.removeEventListener('scroll', onScroll);
+//   }, []);
+
+//   useEffect(() => {
+//     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+//     return () => {
+//       document.body.style.overflow = '';
+//     };
+//   }, [isMenuOpen]);
+
+//   return (
+//     <motion.nav
+//       initial={{ y: -80, opacity: 0 }}
+//       animate={{ y: 0, opacity: 1 }}
+//       transition={{ duration: 0.6, ease: 'easeOut' }}
+//       className={`fixed inset-x-0 top-0 z-50 ${
+//         isScrolled
+//           ? 'glass shadow-lg'
+//           : 'bg-transparent'
+//       }`}
+//     >
+//       <div className="container h-16 lg:h-20 flex items-center justify-between">
+//         {/* Logo */}
+//         <motion.button
+//           onClick={() => scrollToSection('hero')}
+//           className="flex items-center gap-3 group"
+//           whileHover={{ scale: 1.04 }}
+//         >
+//           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center">
+//             <img
+//               src="/favicon.ico"
+//               alt="Peter Toss"
+//               className="w-full h-full object-cover rounded-full"
+//             />
+//           </div>
+
+//           <span className="font-bold text-lg bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+//             Peter Toss
+//           </span>
+//         </motion.button>
+
+//         {/* Desktop Nav */}
+//         <div className="hidden md:flex items-center gap-8">
+//           {navItems.map((item) => (
+//             <motion.button
+//               key={item.id}
+//               onClick={() => scrollToSection(item.id)}
+//               className={`relative text-sm font-medium transition-colors ${
+//                 activeSection === item.id
+//                   ? 'text-indigo-300'
+//                   : 'text-muted hover:text-indigo-300'
+//               }`}
+//               whileHover={{ y: -2 }}
+//             >
+//               {item.label}
+//               {activeSection === item.id && (
+//                 <motion.span
+//                   layoutId="nav-indicator"
+//                   className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full"
+//                 />
+//               )}
+//             </motion.button>
+//           ))}
+//         </div>
+
+//         {/* Mobile */}
+//         <motion.button
+//           className="md:hidden p-2 rounded-xl text-foreground hover:bg-white/5"
+//           onClick={() => setIsMenuOpen(!isMenuOpen)}
+//           whileTap={{ scale: 0.95 }}
+//           aria-label="Toggle menu"
+//         >
+//           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+//         </motion.button>
+//       </div>
+
+//       {/* Mobile Menu */}
+//       <AnimatePresence>
+//         {isMenuOpen && (
+//           <motion.div
+//             initial={{ opacity: 0, y: -10 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: -10 }}
+//             transition={{ duration: 0.25 }}
+//             className="md:hidden glass border-t border-white/10"
+//           >
+//             <div className="container py-6 space-y-3">
+//               {navItems.map((item, i) => (
+//                 <motion.button
+//                   key={item.id}
+//                   onClick={() => {
+//                     scrollToSection(item.id);
+//                     setIsMenuOpen(false);
+//                   }}
+//                   className={`block w-full text-left px-4 py-3 rounded-xl text-lg ${
+//                     activeSection === item.id
+//                       ? 'bg-white/5 text-indigo-300'
+//                       : 'text-muted hover:text-foreground'
+//                   }`}
+//                   initial={{ opacity: 0, x: -10 }}
+//                   animate={{ opacity: 1, x: 0 }}
+//                   transition={{ delay: i * 0.05 }}
+//                 >
+//                   {item.label}
+//                 </motion.button>
+//               ))}
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </motion.nav>
+//   );
+// }
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -206,16 +336,29 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Track scroll for background
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+
     return () => {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     };
   }, [isMenuOpen]);
 
@@ -224,16 +367,17 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed inset-x-0 top-0 z-50 ${
-        isScrolled
-          ? 'glass shadow-lg'
-          : 'bg-transparent'
+      className={`fixed inset-x-0 top-0 z-50 transition-all ${
+        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="container h-16 lg:h-20 flex items-center justify-between">
         {/* Logo */}
         <motion.button
-          onClick={() => scrollToSection('hero')}
+          onClick={() => {
+            scrollToSection('hero');
+            setIsMenuOpen(false);
+          }}
           className="flex items-center gap-3 group"
           whileHover={{ scale: 1.04 }}
         >
@@ -244,7 +388,6 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
               className="w-full h-full object-cover rounded-full"
             />
           </div>
-
           <span className="font-bold text-lg bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
             Peter Toss
           </span>
@@ -274,7 +417,7 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
           ))}
         </div>
 
-        {/* Mobile */}
+        {/* Mobile Hamburger */}
         <motion.button
           className="md:hidden p-2 rounded-xl text-foreground hover:bg-white/5"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -293,7 +436,7 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden glass border-t border-white/10"
+            className="md:hidden glass border-t border-white/10 fixed inset-x-0 top-16 z-[1000]"
           >
             <div className="container py-6 space-y-3">
               {navItems.map((item, i) => (
@@ -311,6 +454,7 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
+                  whileTap={{ scale: 0.985 }}
                 >
                   {item.label}
                 </motion.button>
@@ -322,4 +466,3 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
     </motion.nav>
   );
 }
-
