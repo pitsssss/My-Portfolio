@@ -285,40 +285,39 @@ export default function Navbar({ activeSection }: { activeSection: SectionId }) 
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden glass border-t border-white/10"
+     {/* Mobile Menu */}
+<AnimatePresence>
+  {isMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+      className="md:hidden glass border-t border-white/10"
+    >
+      <div className="container py-6 space-y-3">
+        {navItems.map((item, i) => (
+          <motion.a
+            key={item.id}
+            href={`#${item.id}`} // الرابط إلى القسم مباشرة
+            onClick={() => setIsMenuOpen(false)} // يغلق القائمة بعد الضغط
+            className={`block w-full text-left px-4 py-3 rounded-xl text-lg ${
+              activeSection === item.id
+                ? 'bg-white/5 text-indigo-300'
+                : 'text-muted hover:text-foreground'
+            }`}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
           >
-            <div className="container py-6 space-y-3">
-              {navItems.map((item, i) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => {
-                    scrollToSection(item.id);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`block w-full text-left px-4 py-3 rounded-xl text-lg ${
-                    activeSection === item.id
-                      ? 'bg-white/5 text-indigo-300'
-                      : 'text-muted hover:text-foreground'
-                  }`}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  {item.label}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {item.label}
+          </motion.a>
+        ))}
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </motion.nav>
   );
 }
